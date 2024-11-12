@@ -27,3 +27,18 @@ class TestStatisticsService(unittest.TestCase):
     def test_search_ei_loyda(self):
         pelaaja = self.stats.search("Kuurri")
         self.assertEqual(str(pelaaja), "None")
+    
+    def test_team_loytyy(self):
+        team = self.stats.team("PIT")
+        self.assertEqual(str(team[0]), "Lemieux PIT 45 + 54 = 99")
+
+    def test_team_ei_loyda(self):
+        team = self.stats.team("PIE")
+        self.assertEqual(team, list())
+
+    def test_top(self):
+        top = self.stats.top(2)
+
+        self.assertEqual(str(top[0]), str(self.stats.search("Gretzky")))
+        self.assertEqual(str(top[1]), str(self.stats.search("Lemieux")))
+        
